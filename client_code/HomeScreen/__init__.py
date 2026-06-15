@@ -1,51 +1,24 @@
-from ._anvil_designer import HomeScreenTemplate
 from anvil import *
 import anvil.server
 
-
 class HomeScreen(HomeScreenTemplate):
-    """
-    Level 1 – Home Screen
-    Displays a 2×2 grid of topic cards: Differentiation, Integration, Graphs, Circles.
-    Raises the 'topic_selected' event when the user taps a card.
-    """
+  def __init__(self, **properties):
+    self.init_components(**properties)
+    self._build_ui()
 
-    def __init__(self, **properties):
-        self.init_components(**properties)
-        self._load_topics()
+  def _build_ui(self):
+    topics = [
+      ("Differentiation", "📈", "Rates of change & gradients", "blue"),
+      ("Integration", "🧮", "Areas & anti-derivatives", "green"),
+      ("Graphs", "📖", "Transformations & sketching", "purple"),
+      ("Circles", "⭕", "Equations & geometry", "orange"),
+    ]
+    for name, icon, desc, color in topics:
+      btn = Button(text="{} {}\n{}".format(icon, name, desc), full_width_row=True)
+      btn.tag = name
+      btn.set_event_handler('click', self._topic_clicked)
+      self.add_component(btn)
 
-    def _load_topics(self):
-        """Populate topic cards from the server."""
-        topics = anvil.server.call("get_topics")
-        # Map topic name → card panel in the form
-        card_map = {
-            "Differentiation": self.card_differentiation,
-            "Integration": self.card_integration,
-            "Graphs": self.card_graphs,
-            "Circles": self.card_circles,
-        }
-        # Apply topic metadata to each card
-        desc_map = {
-            "Differentiation": self.lbl_desc_differentiation,
-            "Integration": self.lbl_desc_integration,
-            "Graphs": self.lbl_desc_graphs,
-            "Circles": self.lbl_desc_circles,
-        }
-        for topic in topics:
-            name = topic["name"]
-            if name in desc_map:
-                desc_map[name].text = topic["description"]
-
-    # ── Card click handlers ──────────────────────────────────────────────────
-
-    def card_differentiation_click(self, **event_args):
-        self.raise_event("topic_selected", topic="Differentiation")
-
-    def card_integration_click(self, **event_args):
-        self.raise_event("topic_selected", topic="Integration")
-
-    def card_graphs_click(self, **event_args):
-        self.raise_event("topic_selected", topic="Graphs")
-
-    def card_circles_click(self, **event_args):
-        self.raise_event("topic_selected", topic="Circles")
+  def _topic_clicked(self, sender, **event_args):
+    topic = sender.tag
+    open_form('DifficultyScreen', topic=topic)

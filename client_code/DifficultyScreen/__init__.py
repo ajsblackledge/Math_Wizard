@@ -1,34 +1,39 @@
-from ._anvil_designer import DifficultyScreenTemplate
 from anvil import *
 import anvil.server
 
-
 class DifficultyScreen(DifficultyScreenTemplate):
-    """
-    Level 2 – Difficulty Selection
-    Shown after the user picks a topic. Displays Easy / Medium / Hard cards
-    plus a quiz-info footer (10 questions · 90s · 3 lives · speed bonus).
-    Raises 'difficulty_selected' or 'back_clicked' events.
-    """
+  def __init__(self, topic="", **properties):
+    self.topic = topic
+    self.init_components(**properties)
+    self._build_ui()
 
-    def __init__(self, topic="", **properties):
-        self.topic = topic
-        self.init_components(**properties)
-        self._setup_ui()
+  def _build_ui(self):
+    self.add_component(Label(text="Maths Wizard", foreground="#6b7280"))
+    self.add_component(Label(text=self.topic, bold=True, font_size=28))
+    self.add_component(Label(text="Select a difficulty", foreground="#6b7280"))
 
-    def _setup_ui(self):
-        self.lbl_topic_name.text = self.topic
+    difficulties = [
+      ("Easy", "⚡", "Fundamental concepts & definitions"),
+      ("Medium", "⭐", "Applied techniques & problem solving"),
+      ("Hard", "🔥", "Complex proofs & challenging problems"),
+    ]
+    for name, icon, desc in difficulties:
+      btn = Button(text=f"{icon}  {name} — {desc}", full_width_row=True)
+      btn.tag = name
+      btn.set_event_handler('click', self._difficulty_clicked)
+      self.add_component(btn)
 
-    # ── Difficulty card handlers ─────────────────────────────────────────────
+    self.add_component(Label(
+      text="10 questions  ·  90 second timer  ·  3 lives  ·  Points for speed",
+      foreground="#9ca3af", font_size=11, align="center"
+    ))
 
-    def btn_easy_click(self, **event_args):
-        self.raise_event("difficulty_selected", difficulty="Easy")
+    back_btn = Button(text="← Back")
+    back_btn.set_event_handler('click', self._back_clicked)
+    self.add_component(back_btn)
 
-    def btn_medium_click(self, **event_args):
-        self.raise_event("difficulty_selected", difficulty="Medium")
+  def _difficulty_clicked(self, sender, **event_args):
+    open_form('QuizScreen', topic=self.topic, difficulty=sender.tag)
 
-    def btn_hard_click(self, **event_args):
-        self.raise_event("difficulty_selected", difficulty="Hard")
-
-    def btn_back_click(self, **event_args):
-        self.raise_event("back_clicked")
+  def _back_clicked(self, sender, **event_args):
+    open_form('HomeScreen')

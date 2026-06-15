@@ -1,12 +1,50 @@
 allow_embedding: false
+db_schema:
+  quiz_results:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      client_hidden: false
+      name: topic
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      client_hidden: false
+      name: difficulty
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      client_hidden: false
+      name: score
+      type: number
+    - admin_ui: {order: 3, width: 200}
+      client_hidden: false
+      name: correct_count
+      type: number
+    - admin_ui: {order: 4, width: 200}
+      client_hidden: false
+      name: reason
+      type: string
+    - admin_ui: {order: 5, width: 200}
+      client_hidden: false
+      name: time_used
+      type: number
+    - admin_ui: {order: 6, width: 200}
+      client_hidden: false
+      name: completed_at
+      type: datetime
+    indexes: []
+    server: full
+    title: quiz_results
 dependencies: []
 metadata: {description: 'A-Level Mathematics Quiz App with Differentiation, Integration, Graphs and Circles', title: Maths Wizard Quiz}
 package_name: MathsWizardQuiz
 runtime_options:
   client_version: '2'
   server_spec: {}
+  server_version: python3-sandbox
   version: 2
 services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/tables.yml
+startup: {module: MainForm, type: form}
+startup_form: null
