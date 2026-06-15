@@ -1,0 +1,12 @@
+package_name: MathsWizardQuiz
+runtime_options:
+  version: 2
+allow_embedding: false
+metadata:
+  title: Maths Wizard Quiz
+  description: A-Level Mathematics Quiz App with Differentiation, Integration, Graphs and Circles
+dependencies: []
+services:
+  - source: /runtime/services/tables.yml
+    client_config: {}
+    server_config: {}

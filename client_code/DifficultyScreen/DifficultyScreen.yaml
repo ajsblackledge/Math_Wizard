@@ -1,0 +1,104 @@
+components:
+  - name: column_panel_root
+    type: ColumnPanel
+    components:
+      # ── Back button ──────────────────────────────────────────────────────────
+      - name: btn_back
+        type: Button
+        properties:
+          text: "← Back"
+          role: secondary-color
+          font_size: 13
+          spacing_above: none
+          spacing_below: large
+        event_bindings:
+          click: btn_back_click
+
+      # ── Header ───────────────────────────────────────────────────────────────
+      - name: lbl_app_name
+        type: Label
+        properties:
+          text: "Maths Wizard"
+          foreground: "#6b7280"
+          font_size: 13
+          spacing_above: none
+          spacing_below: none
+
+      - name: lbl_topic_name
+        type: Label
+        properties:
+          text: ""
+          bold: true
+          font_size: 28
+          spacing_above: small
+          spacing_below: none
+
+      - name: lbl_select_prompt
+        type: Label
+        properties:
+          text: Select a difficulty
+          foreground: "#6b7280"
+          font_size: 14
+          spacing_above: small
+          spacing_below: large
+
+      # ── Easy card ────────────────────────────────────────────────────────────
+      - name: btn_easy
+        type: Button
+        properties:
+          text: "⚡  Easy — Fundamental concepts & definitions"
+          role: primary-color
+          background: "#ecfdf5"
+          foreground: "#065f46"
+          border: "2px solid #a7f3d0"
+          font_size: 14
+          full_width_row: true
+          spacing_below: small
+        event_bindings:
+          click: btn_easy_click
+
+      # ── Medium card ──────────────────────────────────────────────────────────
+      - name: btn_medium
+        type: Button
+        properties:
+          text: "⭐  Medium — Applied techniques & problem solving"
+          role: primary-color
+          background: "#fffbeb"
+          foreground: "#92400e"
+          border: "2px solid #fde68a"
+          font_size: 14
+          full_width_row: true
+          spacing_below: small
+        event_bindings:
+          click: btn_medium_click
+
+      # ── Hard card ────────────────────────────────────────────────────────────
+      - name: btn_hard
+        type: Button
+        properties:
+          text: "🔥  Hard — Complex proofs & challenging problems"
+          role: primary-color
+          background: "#fef2f2"
+          foreground: "#7f1d1d"
+          border: "2px solid #fca5a5"
+          font_size: 14
+          full_width_row: true
+          spacing_below: large
+        event_bindings:
+          click: btn_hard_click
+
+      # ── Info footer ──────────────────────────────────────────────────────────
+      - name: lbl_quiz_info
+        type: Label
+        properties:
+          text: "10 questions  ·  90 second timer  ·  3 lives  ·  Points for speed"
+          foreground: "#9ca3af"
+          font_size: 11
+          align: center
+          italic: true
+
+events:
+  - name: difficulty_selected
+    description: Fired when user picks Easy/Medium/Hard. Passes difficulty (str).
+  - name: back_clicked
+    description: Fired when user taps the Back button.

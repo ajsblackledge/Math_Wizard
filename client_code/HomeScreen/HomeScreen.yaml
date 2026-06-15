@@ -1,0 +1,182 @@
+components:
+  - name: column_panel_root
+    type: ColumnPanel
+    properties:
+      col_widths: {}
+    components:
+      # ── Header ──────────────────────────────────────────────────────────────
+      - name: lbl_subtitle
+        type: Label
+        properties:
+          text: A-Level Mathematics
+          foreground: "#6b7280"
+          font_size: 13
+          role: subheading
+          spacing_above: none
+          spacing_below: none
+
+      - name: lbl_title
+        type: Label
+        properties:
+          text: "Maths Wizard \U0001F9D9"
+          bold: true
+          font_size: 32
+          spacing_above: small
+          spacing_below: none
+
+      - name: lbl_prompt
+        type: Label
+        properties:
+          text: Choose a topic to start
+          foreground: "#6b7280"
+          font_size: 14
+          spacing_above: small
+          spacing_below: large
+
+      # ── 2×2 Topic Grid ─────────────────────────────────────────────────────
+      - name: grid_topics
+        type: GridPanel
+        properties:
+          col_widths: { "A": 50, "B": 50 }
+        components:
+          # Row 1: Differentiation | Integration
+          - name: card_differentiation
+            type: Link
+            layout_properties: { row: "A", col_xs: "A", width_xs: 1 }
+            properties:
+              role: card
+              background: "#eff6ff"
+              border: "2px solid #bfdbfe"
+              foreground: "#1d4ed8"
+            event_bindings:
+              click: card_differentiation_click
+            components:
+              - name: lbl_icon_diff
+                type: Label
+                properties:
+                  text: "📈"
+                  font_size: 26
+                  spacing_below: none
+              - name: lbl_name_differentiation
+                type: Label
+                properties:
+                  text: Differentiation
+                  bold: true
+                  font_size: 14
+                  foreground: "#1d4ed8"
+                  spacing_above: small
+                  spacing_below: none
+              - name: lbl_desc_differentiation
+                type: Label
+                properties:
+                  text: Rates of change & gradients
+                  foreground: "#6b7280"
+                  font_size: 11
+                  spacing_above: none
+
+          - name: card_integration
+            type: Link
+            layout_properties: { row: "A", col_xs: "B", width_xs: 1 }
+            properties:
+              role: card
+              background: "#ecfdf5"
+              border: "2px solid #a7f3d0"
+              foreground: "#065f46"
+            event_bindings:
+              click: card_integration_click
+            components:
+              - name: lbl_icon_integ
+                type: Label
+                properties:
+                  text: "🧮"
+                  font_size: 26
+                  spacing_below: none
+              - name: lbl_name_integration
+                type: Label
+                properties:
+                  text: Integration
+                  bold: true
+                  font_size: 14
+                  foreground: "#065f46"
+                  spacing_above: small
+                  spacing_below: none
+              - name: lbl_desc_integration
+                type: Label
+                properties:
+                  text: Areas & anti-derivatives
+                  foreground: "#6b7280"
+                  font_size: 11
+                  spacing_above: none
+
+          # Row 2: Graphs | Circles
+          - name: card_graphs
+            type: Link
+            layout_properties: { row: "B", col_xs: "A", width_xs: 1 }
+            properties:
+              role: card
+              background: "#f5f3ff"
+              border: "2px solid #ddd6fe"
+              foreground: "#5b21b6"
+            event_bindings:
+              click: card_graphs_click
+            components:
+              - name: lbl_icon_graphs
+                type: Label
+                properties:
+                  text: "📖"
+                  font_size: 26
+                  spacing_below: none
+              - name: lbl_name_graphs
+                type: Label
+                properties:
+                  text: Graphs
+                  bold: true
+                  font_size: 14
+                  foreground: "#5b21b6"
+                  spacing_above: small
+                  spacing_below: none
+              - name: lbl_desc_graphs
+                type: Label
+                properties:
+                  text: Transformations & sketching
+                  foreground: "#6b7280"
+                  font_size: 11
+                  spacing_above: none
+
+          - name: card_circles
+            type: Link
+            layout_properties: { row: "B", col_xs: "B", width_xs: 1 }
+            properties:
+              role: card
+              background: "#fff7ed"
+              border: "2px solid #fed7aa"
+              foreground: "#9a3412"
+            event_bindings:
+              click: card_circles_click
+            components:
+              - name: lbl_icon_circles
+                type: Label
+                properties:
+                  text: "⭕"
+                  font_size: 26
+                  spacing_below: none
+              - name: lbl_name_circles
+                type: Label
+                properties:
+                  text: Circles
+                  bold: true
+                  font_size: 14
+                  foreground: "#9a3412"
+                  spacing_above: small
+                  spacing_below: none
+              - name: lbl_desc_circles
+                type: Label
+                properties:
+                  text: Equations & geometry
+                  foreground: "#6b7280"
+                  font_size: 11
+                  spacing_above: none
+
+events:
+  - name: topic_selected
+    description: Fired when the user selects a topic card. Passes topic (str).

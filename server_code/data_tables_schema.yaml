@@ -1,0 +1,34 @@
+# Anvil Data Tables schema
+# Table: quiz_results
+# Stores every completed quiz session for leaderboard & analytics
+
+tables:
+  quiz_results:
+    columns:
+      - name: topic
+        type: string
+        description: "One of: Differentiation, Integration, Graphs, Circles"
+
+      - name: difficulty
+        type: string
+        description: "One of: Easy, Medium, Hard"
+
+      - name: score
+        type: number
+        description: "Final score (base 100 per correct + speed bonus)"
+
+      - name: correct_count
+        type: number
+        description: "Number of correct answers out of 10"
+
+      - name: reason
+        type: string
+        description: "End reason: completed | timeout | no-lives"
+
+      - name: time_used
+        type: number
+        description: "Seconds elapsed during the quiz (0–90)"
+
+      - name: completed_at
+        type: datetime
+        description: "Timestamp when the quiz ended"
